@@ -1,0 +1,37 @@
+### Variables (extensión REST Client de VS Code)
+@base = http://localhost:3000/api
+
+GET {{base}}/dashboard
+###
+PATCH {{base}}/dashboard/alertas/HU-03
+Content-Type: application/json
+
+{ "status": "Resuelto" }
+###
+DELETE {{base}}/dashboard/alertas/HU-03
+###
+GET {{base}}/alertas
+###
+POST {{base}}/alertas/AL-021/notificar-pnp
+###
+DELETE {{base}}/alertas/AL-020
+###
+GET {{base}}/incidentes
+###
+GET {{base}}/reportes?rango=30
+###
+GET {{base}}/configuracion
+###
+PUT {{base}}/configuracion
+Content-Type: application/json
+
+{ "confidence": 85, "detectForce": true, "detectWeapons": true, "detectObjects": false,
+  "activeModel": "v1.8.0-prod", "notifyPnp": true, "soundAlarm": false, "pnpContact": "105",
+  "cameras": [ { "bus": "BUS-302", "model": "Cámara v3", "active": true },
+               { "bus": "BUS-118", "model": "Cámara v2", "active": true } ] }
+###
+### Puente con la IA (HU-01): un forcejeo aparece luego en GET /alertas
+POST {{base}}/eventos
+Content-Type: application/json
+
+{ "bus_id": "BUS-302", "velocidad_movimiento": 95, "acercamiento_brusco": 1, "latitud": -12.0911, "longitud": -77.023 }
